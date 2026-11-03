@@ -77,7 +77,7 @@ public class FinancialTracker {
      */
     public static void loadTransactions(String fileName) {
 
-        File otherFile = new File(fileName);
+        File otherFile = new File(FILE_NAME);
 
         try {
             if (!otherFile.exists()){
@@ -97,20 +97,19 @@ public class FinancialTracker {
                     LocalTime time = LocalTime.parse(parts[1]);
                     String description = parts[2];
                     String vendor = parts[3];
-                    int price = Integer.parseInt(parts[4]);
+                    double amount = Double.parseDouble(parts[4]);
+
+                    Transaction transaction = new Transaction(date, time, description, vendor, amount);
+
+                    transactions.add(transaction);
+
                 }
             }
+            br.close();
 
         }catch (IOException e){
             e.printStackTrace();
         }
-
-
-
-
-
-
-
         // TODO: create file if it does not exist, then read each line,
         //       parse the five fields, build a Transaction object,
         //       and add it to the transactions list.
@@ -127,6 +126,7 @@ public class FinancialTracker {
      * Store the amount as-is (positive) and append to the file.
      */
     private static void addDeposit(Scanner scanner) {
+        System.out.println("What is the date and time()?");
         // TODO
     }
 
