@@ -126,7 +126,12 @@ public class FinancialTracker {
      * Store the amount as-is (positive) and append to the file.
      */
     private static void addDeposit(Scanner scanner) {
-        System.out.println("What is the date and time()?");
+        System.out.print("What is the date and time("+ DATE_PATTERN +" "+ TIME_PATTERN +") of the transaction? ");
+        String scanner1 = scanner.nextLine();
+        System.out.print("What is the description of the transaction? ");
+        String scanner2 = scanner.nextLine();
+
+
         // TODO
     }
 
