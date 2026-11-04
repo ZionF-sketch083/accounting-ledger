@@ -130,7 +130,10 @@ public class FinancialTracker {
         String scanner1 = scanner.nextLine();
         System.out.print("What is the description of the transaction? ");
         String scanner2 = scanner.nextLine();
-
+        System.out.print("Who is the vendor of this transaction? ");
+        String scanner3 = scanner.nextLine();
+        System.out.print("What was the amount of the transaction? ");
+        String scanner4 = scanner.nextLine();
 
         // TODO
     }
