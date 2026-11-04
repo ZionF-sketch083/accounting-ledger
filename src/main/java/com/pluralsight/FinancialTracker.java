@@ -126,14 +126,40 @@ public class FinancialTracker {
      * Store the amount as-is (positive) and append to the file.
      */
     private static void addDeposit(Scanner scanner) {
-        System.out.print("What is the date and time("+ DATE_PATTERN +" "+ TIME_PATTERN +") of the transaction? ");
-        String scanner1 = scanner.nextLine();
-        System.out.print("What is the description of the transaction? ");
-        String scanner2 = scanner.nextLine();
-        System.out.print("Who is the vendor of this transaction? ");
-        String scanner3 = scanner.nextLine();
-        System.out.print("What was the amount of the transaction? ");
-        String scanner4 = scanner.nextLine();
+
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME, true));
+
+            System.out.print("What is the date and time("+ DATE_PATTERN +" "+ TIME_PATTERN +") of the transaction? ");
+            String dateTime = scanner.nextLine();
+            System.out.print("What is the description of the transaction? ");
+            String description = scanner.nextLine();
+            System.out.print("Who is the vendor of this transaction? ");
+            String vendor = scanner.nextLine();
+            System.out.print("What was the amount of the transaction? ");
+            double amount = Double.parseDouble(scanner.nextLine());
+            scanner.nextLine();
+
+            if (amount <= 0){
+                System.out.println("Deposit must be greater than zero.");
+                return;
+            }
+
+            LocalDate date = LocalDate.parse(dateTime.split(" ")[0]);
+            LocalTime time = LocalTime.parse(dateTime.split(" ")[1]);
+
+
+            transactions.add(new Transaction(date, time, description, vendor, amount));
+
+            bw.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount);
+            bw.newLine();
+            bw.close();
+
+        } catch (Exception e) {
+            System.out.println("Oh on, something went wrong.");
+        }
+
+        System.out.println("Thank you for adding deposit.");
 
         // TODO
     }
@@ -144,6 +170,43 @@ public class FinancialTracker {
      * then converted to a negative amount before storing.
      */
     private static void addPayment(Scanner scanner) {
+
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME, true));
+
+            System.out.print("What is the date and time("+ DATE_PATTERN +" "+ TIME_PATTERN +") of this transaction? ");
+            String dateTime = scanner.nextLine();
+            System.out.print("What is the description of the transaction? ");
+            String description = scanner.nextLine();
+            System.out.print("Who is the vendor of this transaction? ");
+            String vendor = scanner.nextLine();
+            System.out.print("What was the amount of the transaction? ");
+            double amount = Double.parseDouble(scanner.nextLine());
+            scanner.nextLine();
+
+
+
+            if (amount >= 0){
+                System.out.println("Deposit must be lesser than zero.");
+                return;
+            }
+
+            LocalDate date = LocalDate.parse(dateTime.split(" ")[0]);
+            LocalTime time = LocalTime.parse(dateTime.split(" ")[1]);
+
+
+            transactions.add(new Transaction(date, time, description, vendor, amount));
+
+            bw.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount);
+            bw.newLine();
+            bw.close();
+
+        } catch (Exception e) {
+            System.out.println("Oh on, something went wrong.");
+        }
+
+        System.out.println("Thank you for adding deposit.");
+
         // TODO
     }
 
