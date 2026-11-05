@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /*
@@ -138,7 +139,7 @@ public class FinancialTracker {
             String vendor = scanner.nextLine();
             System.out.print("What was the amount of the transaction? ");
             double amount = Double.parseDouble(scanner.nextLine());
-            scanner.nextLine();
+            // scanner.nextLine();
 
             if (amount <= 0){
                 System.out.println("Deposit must be greater than zero.");
@@ -182,20 +183,13 @@ public class FinancialTracker {
             String vendor = scanner.nextLine();
             System.out.print("What was the amount of the transaction? ");
             double amount = Double.parseDouble(scanner.nextLine());
-            scanner.nextLine();
-
-
-
-            if (amount >= 0){
-                System.out.println("Deposit must be lesser than zero.");
-                return;
-            }
 
             LocalDate date = LocalDate.parse(dateTime.split(" ")[0]);
             LocalTime time = LocalTime.parse(dateTime.split(" ")[1]);
 
+            double payment = -amount;
 
-            transactions.add(new Transaction(date, time, description, vendor, amount));
+            transactions.add(new Transaction(date, time, description, vendor, payment));
 
             bw.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount);
             bw.newLine();
@@ -205,7 +199,7 @@ public class FinancialTracker {
             System.out.println("Oh on, something went wrong.");
         }
 
-        System.out.println("Thank you for adding deposit.");
+        System.out.println("Thank you for payment.");
 
         // TODO
     }
@@ -215,6 +209,7 @@ public class FinancialTracker {
        ------------------------------------------------------------------ */
     private static void ledgerMenu(Scanner scanner) {
         boolean running = true;
+
         while (running) {
             System.out.println("Ledger");
             System.out.println("Choose an option:");
@@ -240,7 +235,20 @@ public class FinancialTracker {
     /* ------------------------------------------------------------------
        Display helpers: show data in neat columns
        ------------------------------------------------------------------ */
-    private static void displayLedger() { /* TODO – print all transactions in column format, newest first */ }
+    private static void displayLedger() {
+        Collections.reverse(transactions);
+
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("transactions.csv", true));
+
+
+
+
+        }catch (Exception e){
+
+        }
+        /* TODO – print all transactions in column format, newest first */
+    }
 
     private static void displayDeposits() { /* TODO – only amount > 0               */ }
 
