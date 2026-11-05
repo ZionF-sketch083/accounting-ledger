@@ -141,7 +141,7 @@ public class FinancialTracker {
             double amount = Double.parseDouble(scanner.nextLine());
             // scanner.nextLine();
 
-            if (amount <= 0){
+            if (amount < 0){
                 System.out.println("Deposit must be greater than zero.");
                 return;
             }
@@ -162,6 +162,7 @@ public class FinancialTracker {
         }
 
         System.out.println("Thank you for adding deposit.");
+        scanner.close();
 
         // TODO
     }
@@ -185,8 +186,8 @@ public class FinancialTracker {
             System.out.print("What was the amount of the transaction? ");
             double amount = Double.parseDouble(scanner.nextLine());
 
-            if (amount > 0) {
-                System.out.println("Your payment must be lesser than zero.");
+            if (amount < 0) {
+                System.out.println("Your payment must be a positive number.");
                 return;
             }
             amount = -amount;
@@ -199,7 +200,7 @@ public class FinancialTracker {
             bw.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount);
             bw.newLine();
             bw.close();
-            scanner.close();
+
 
         } catch (Exception e) {
             System.out.println("Oh on, something went wrong.");
@@ -214,6 +215,7 @@ public class FinancialTracker {
        Ledger menu
        ------------------------------------------------------------------ */
     private static void ledgerMenu(Scanner scanner) {
+
         boolean running = true;
         while (running) {
             System.out.println("Ledger");
@@ -241,7 +243,7 @@ public class FinancialTracker {
        Display helpers: show data in neat columns
        ------------------------------------------------------------------ */
     private static void displayLedger() {
-        Collections.reverse(transactions);
+
 
         for (Transaction transaction : transactions) {
             System.out.println(transaction);
@@ -257,7 +259,6 @@ public class FinancialTracker {
                 System.out.println(transaction);
             }
         }
-
         /* TODO – only amount > 0               */
     }
 
@@ -305,10 +306,18 @@ public class FinancialTracker {
        Reporting helpers
        ------------------------------------------------------------------ */
     private static void filterTransactionsByDate(LocalDate start, LocalDate end) {
+        for (Transaction transaction : transactions) {
+            LocalDate date = transaction.getDate();
+        }
         // TODO – iterate transactions, print those within the range
     }
 
     private static void filterTransactionsByVendor(String vendor) {
+        for (Transaction transaction : transactions) {
+            if (transaction.getVendor().equalsIgnoreCase(vendor)){
+                System.out.println(vendor);
+            }
+        }
         // TODO – iterate transactions, print those with matching vendor
     }
 
