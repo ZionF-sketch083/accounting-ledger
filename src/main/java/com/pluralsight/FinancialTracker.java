@@ -155,6 +155,7 @@ public class FinancialTracker {
             bw.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount);
             bw.newLine();
             bw.close();
+            scanner.close();
 
         } catch (Exception e) {
             System.out.println("Oh on, something went wrong.");
@@ -184,16 +185,21 @@ public class FinancialTracker {
             System.out.print("What was the amount of the transaction? ");
             double amount = Double.parseDouble(scanner.nextLine());
 
+            if (amount > 0) {
+                System.out.println("Your payment must be lesser than zero.");
+                return;
+            }
+            amount = -amount;
+
             LocalDate date = LocalDate.parse(dateTime.split(" ")[0]);
             LocalTime time = LocalTime.parse(dateTime.split(" ")[1]);
-
-
 
             transactions.add(new Transaction(date, time, description, vendor, amount));
 
             bw.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount);
             bw.newLine();
             bw.close();
+            scanner.close();
 
         } catch (Exception e) {
             System.out.println("Oh on, something went wrong.");
@@ -209,7 +215,6 @@ public class FinancialTracker {
        ------------------------------------------------------------------ */
     private static void ledgerMenu(Scanner scanner) {
         boolean running = true;
-
         while (running) {
             System.out.println("Ledger");
             System.out.println("Choose an option:");
@@ -237,12 +242,33 @@ public class FinancialTracker {
        ------------------------------------------------------------------ */
     private static void displayLedger() {
 
+        for (Transaction transaction : transactions) {
+            System.out.println(transaction);
+        }
         /* TODO – print all transactions in column format, newest first */
     }
 
-    private static void displayDeposits() { /* TODO – only amount > 0               */ }
+    private static void displayDeposits() {
 
-    private static void displayPayments() { /* TODO – only amount < 0               */ }
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() > 0) {
+                System.out.println(transaction);
+            }
+        }
+
+
+
+        /* TODO – only amount > 0               */
+    }
+
+    private static void displayPayments() {
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() < 0) {
+                System.out.println(transaction);
+            }
+        }
+        /* TODO – only amount < 0               */
+    }
 
     /* ------------------------------------------------------------------
        Reports menu
