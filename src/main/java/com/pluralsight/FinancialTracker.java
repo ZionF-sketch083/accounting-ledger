@@ -241,6 +241,7 @@ public class FinancialTracker {
        Display helpers: show data in neat columns
        ------------------------------------------------------------------ */
     private static void displayLedger() {
+        Collections.reverse(transactions);
 
         for (Transaction transaction : transactions) {
             System.out.println(transaction);
@@ -250,13 +251,12 @@ public class FinancialTracker {
 
     private static void displayDeposits() {
 
+
         for (Transaction transaction : transactions) {
             if (transaction.getAmount() > 0) {
                 System.out.println(transaction);
             }
         }
-
-
 
         /* TODO – only amount > 0               */
     }
