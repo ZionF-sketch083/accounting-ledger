@@ -187,9 +187,9 @@ public class FinancialTracker {
             LocalDate date = LocalDate.parse(dateTime.split(" ")[0]);
             LocalTime time = LocalTime.parse(dateTime.split(" ")[1]);
 
-            double payment = -amount;
 
-            transactions.add(new Transaction(date, time, description, vendor, payment));
+
+            transactions.add(new Transaction(date, time, description, vendor, amount));
 
             bw.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount);
             bw.newLine();
@@ -236,17 +236,7 @@ public class FinancialTracker {
        Display helpers: show data in neat columns
        ------------------------------------------------------------------ */
     private static void displayLedger() {
-        Collections.reverse(transactions);
 
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("transactions.csv", true));
-
-
-
-
-        }catch (Exception e){
-
-        }
         /* TODO – print all transactions in column format, newest first */
     }
 
