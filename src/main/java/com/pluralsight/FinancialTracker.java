@@ -52,9 +52,6 @@ public class FinancialTracker {
         scanner.close();
     }
 
-
-
-
     public static void loadTransactions(String fileName) {
 
         File otherFile = new File(FILE_NAME);
@@ -299,9 +296,7 @@ public class FinancialTracker {
         }
     }
 
-    /* ------------------------------------------------------------------
-       Reporting helpers
-       ------------------------------------------------------------------ */
+
     private static void filterTransactionsByDate(LocalDate start, LocalDate end) {
         for (Transaction transaction : transactions) {
             LocalDate date = transaction.getDate();

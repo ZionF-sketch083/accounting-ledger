@@ -1,4 +1,6 @@
-# Project Title
+# Bread Bank
+
+A console app of the bank that keep track of all of your transactions you made.
 
 <!-- HOW TO USE THIS TEMPLATE
      Save it as README.md at the root of your project, next to pom.xml. Replace every comment like this one
@@ -115,7 +117,7 @@
 
 <!-- Your name and, if you like, your GitHub profile link. For a team workshop, one line per person with what each one built. -->
 
-- **Your Name**
+- **Zion C. Freeman**
 
 ## Thanks
 
