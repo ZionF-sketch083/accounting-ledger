@@ -1,6 +1,7 @@
 # Bread Bank
 
-A console app of the bank that keep track of all of your transactions you made.
+A console app of the bank that keep track of all of your transactions you made in a csv file 
+and allow you to report on transactions and have it be structure by either the month or year.
 
 <!-- HOW TO USE THIS TEMPLATE
      Save it as README.md at the root of your project, next to pom.xml. Replace every comment like this one
@@ -12,6 +13,13 @@ A console app of the bank that keep track of all of your transactions you made.
      Example: A console app that keeps a store's inventory in a csv file and lets a clerk search it. -->
 
 ## Description of the Project
+
+This version of Bread Bank is a Java console application for someone who want to keep track of their transactions 
+that they made. Each transaction has a date, time, description, vendor of the transaction, and the amount. The app will 
+read from a file when booted up, let the user add deposits and payments, and allow them to look at the list of either 
+if they want to only look the deposits, payments, or everything. They are also allow to give out reports to
+the list of transactions to have them structure to only show the transaction of the month or year or the previous month 
+or previous year.
 
 <!-- Three to five sentences. What the application does, who uses it, what problem it solves.
      Write it for someone who has never seen the workbook: a recruiter, a classmate, you in six months. -->
@@ -25,9 +33,10 @@ A console app of the bank that keep track of all of your transactions you made.
      - Shows every product in the store
      - Searches products by name (bonus) -->
 
--
--
--
+- Have it where it shows the dates, times, descriptions, sellers and prices of said transactions
+- Make sure to have the deposits and payments show by date
+- Have the transactions be filtered by the beginning of the year to the current date or transactions from 
+the previous year, or from the beginning of the month to current date or transactions from the previous month.
 
 ## User Stories
 
@@ -35,8 +44,10 @@ A console app of the bank that keep track of all of your transactions you made.
      As a [type of user], I want [some goal] so that [some reason].
      Same text as the cards on your GitHub project board. -->
 
-- As a ..., I want ..., so that ...
-- As a ..., I want ..., so that ...
+- As a user, I want to see all my transactions with the date, time, description, seller and price, 
+so that I will be notified by a purchase that I didn't authorize.
+- As a user, I want to locate transactions from either this year or the previous year or this month, or the previous, 
+so that I could find the transactions easier.
 
 ## Setup
 
@@ -50,10 +61,13 @@ A console app of the bank that keep track of all of your transactions you made.
 1. Clone this repository, or download it as a zip and unzip it.
 2. In IntelliJ: File > Open, pick the project folder (the one that holds `pom.xml`), press Open.
 3. Wait for IntelliJ to finish indexing (progress bar at the bottom).
-4. Open `src/main/java/com/pluralsight/YourMainClassName.java`. <!-- replace YourMainClassName with the class that has main -->
-5. Right-click inside the file and choose Run 'YourMainClassName.main()'.
+4. Open `src/main/java/com/pluralsight/capstone/accounting-ledger.java`.
+5. Right-click inside the file and choose Run 'FinancialTracker.main()'.
 
 ### Data and configuration
+
+- 'transactions.csv' is rooted on the top bar. The program needs this file so it could put all the transactions at and 
+read off of with prompt to list it out.
 
 <!-- OPTIONAL. Anything the program needs that is not code: data files and where they must sit, files the
      program creates, a database script to run first, a settings file to edit (connection, port).
@@ -91,27 +105,41 @@ A console app of the bank that keep track of all of your transactions you made.
 
 ## A piece of code I am proud of
 
+         
+
 <!-- Paste one short block of your own code (5 to 15 lines) between the three backticks, then write two
      or three sentences: what it does and why you chose to write it that way. This is what you show on
      demo day and what you talk about in an interview. -->
 
-```java
+      if (amount < 0) {
+         System.out.println("Your payment must be a positive number.");
+         return;
+         }
+           amount = -amount;
+            LocalDate date = LocalDate.parse(dateTime.split(" ")[0]);
+            LocalTime time = LocalTime.parse(dateTime.split(" ")[1]);
+            transactions.add(new Transaction(date, time, description, vendor, amount));
+            bw.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount);
+            bw.newLine();
+            bw.close();         
 
-```
+This piece of code is where, depending on the user input, the program will separate the transaction in 5 parts
+it would then put "|" in between the parts. I use the parse to split the datetime into two separate variables. 
+
 
 ## Future Work
 
 <!-- What you would add or fix next, one bullet each. Unfinished bonuses belong here. -->
 
--
--
+- Sort the search result by the user choice
 
 ## Resources
 
 <!-- What helped you: the workbook, the week's hub pages, a tutorial, a documentation page. Real links. -->
 
 - Java YearUp Fall 2026 hub: <https://raymaroun.github.io/yearup-java-fall2026/>
--
+- Java Visual Hub, Capstone 1, Build Guide and the Commit Message: https://raymaroun.github.io/yearup-java-fall2026/week-04/index.html
+- Microsoft Copilot AI agent: https://copilot.cloud.microsoft/chat?fromcode=cmm5vstpudj&es=UnauthClick&redirfrom=ccAadReentry&redirfrom=userTypeCookie&redirfrom=cosmicRingCookie
 
 ## Author
 
@@ -123,4 +151,5 @@ A console app of the bank that keep track of all of your transactions you made.
 
 <!-- Optional. The people who helped: the instructor, a classmate who debugged with you, a mentor. -->
 
-- Thank you to ... for ...
+- Thank you to Raymond for providing a skeleton of the code(or a layout of the code) that made programing a bit easier.
+- Thank you to Adrian and Maalik for checking my code and giving some advises for my code.
