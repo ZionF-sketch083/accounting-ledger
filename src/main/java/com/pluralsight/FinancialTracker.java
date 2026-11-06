@@ -127,7 +127,7 @@ public class FinancialTracker {
         }
 
         System.out.println("Thank you for adding deposit.");
-        scanner.close();
+
     }
 
 
@@ -166,7 +166,7 @@ public class FinancialTracker {
         }
 
         System.out.println("Thank you for payment.");
-        scanner.close();
+
     }
 
 
